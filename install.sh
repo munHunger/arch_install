@@ -11,3 +11,9 @@ file /etc/systemd/system/display-manager.service
 pacman -S i3-wm --noconfirm --needed
 pacman -S git --noconfirm --needed
 pacman -S emacs --noconfirm --needed
+git clone https://github.com/munhunger/arch_install.git
+cd arch_install
+cp config/.Xdefaults ~/
+mkdir ~/.config
+cp -r config/i3 ~/.config
+cp -r config/emacs ~/.emacs.d
