@@ -174,38 +174,37 @@ bar {
 
 # -=-=-=-=-=-=-CUSTOM-=-=-=-=-=-=-
 #bindsym $mod+l exec "~/.config/i3lock/config.sh"
-bindsym $mod+l exec "~/.config/i3/lock.sh"
-exec xautolock -time 10 -locker '~/.config/i3lock/config.sh' &
+#bindsym $mod+l exec "~/.config/i3/lock.sh"
+#exec xautolock -time 10 -locker '~/.config/i3lock/config.sh' &
 bindsym $mod+Control+Left move workspace to output left
 bindsym $mod+Control+Right move workspace to output right
 bindsym $mod+Control+Up move workspace to output up
 bindsym $mod+Control+Down move workspace to output down
-exec --no-startup-id "feh --bg-scale ~/wallpaper/m.jpg"
-exec --no-startup-id "nm-applet"
-exec --no-startup-id "blueman-applet"
-exec --no-startup-id "~/.config/i3/dbus.sh"
+#exec --no-startup-id "feh --bg-scale ~/wallpaper/m.jpg"
+#exec --no-startup-id "nm-applet"
+#exec --no-startup-id "blueman-applet"
+#exec --no-startup-id "~/.config/i3/dbus.sh"
 
 bindsym XF86AudioPause exec "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause"
 bindsym XF86AudioPlay exec "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause"
 
-exec --no-startup-id messengerfordesktop
-exec --no-startup-id telegram
-exec --no-startup-id hiri
-exec --no-startup-id slack
-exec --no-startup-id intelliJ
-exec --no-startup-id urxvt
-for_window [class="sddm-greeter"] fullscreen toggle global
-for_window [class="URxvt"] border 1pixel
-assign [class="Pgadmin3"] $ws6
-assign [class="Code"] $ws2
-assign [class="jetbrains-idea"] $ws2
-assign [class="Emacs"] $ws2
-assign [class="Spotify"] $ws7
-assign [class="Slack"] $ws9
-assign [class="hiri"] $ws9
-assign [class="Telegram"] $ws9
-assign [class="Messenger for Desktop"] $ws9
+#exec --no-startup-id messengerfordesktop
+#exec --no-startup-id telegram
+#exec --no-startup-id hiri
+#exec --no-startup-id slack
+#exec --no-startup-id intelliJ
+#exec --no-startup-id urxvt
+#for_window [class="sddm-greeter"] fullscreen toggle global
+#for_window [class="URxvt"] border 1pixel
+#assign [class="Pgadmin3"] $ws6
+#assign [class="Code"] $ws2
+#assign [class="jetbrains-idea"] $ws2
+#assign [class="Emacs"] $ws2
+#assign [class="Spotify"] $ws7
+#assign [class="Slack"] $ws9
+#assign [class="hiri"] $ws9
+#assign [class="Telegram"] $ws9
+#assign [class="Messenger for Desktop"] $ws9
 
-exec --no-startup-id "export PATH=/opt/flutter/bin:$PATH"
-bindsym Print exec scrot '%Y%m%d_%H%M%S.png' -e 'mv $f $HOME/pictures/screenshots' && notify-send 'screnshot' 'taken. in ~/pictures/screenshots'
-bindsym shift+Print --release exec notify-send 'screenshot' 'please select area' && scrot '%Y%m%d_%H%M%S.png' -s -e 'mv $f $HOME/pictures/screenshots' && notify-send 'screnshot' 'taken. in ~/pictures/screenshots'
+#bindsym Print exec scrot '%Y%m%d_%H%M%S.png' -e 'mv $f $HOME/pictures/screenshots' && notify-send 'screnshot' 'taken. in ~/pictures/screenshots'
+#bindsym shift+Print --release exec notify-send 'screenshot' 'please select area' && scrot '%Y%m%d_%H%M%S.png' -s -e 'mv $f $HOME/pictures/screenshots' && notify-send 'screnshot' 'taken. in ~/pictures/screenshots'
