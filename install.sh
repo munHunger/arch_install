@@ -8,7 +8,7 @@ pacman -S xf86-video-nouveau --noconfirm --needed
 pacman -S sddm --noconfirm --needed
 systemctl enable sddm
 file /etc/systemd/system/display-manager.service
-pacman -S i3-wm --noconfirm --needed
+pacman -S i3 --noconfirm --needed
 pacman -S git --noconfirm --needed
 pacman -S emacs --noconfirm --needed
 git clone https://github.com/munhunger/arch_install.git
