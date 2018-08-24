@@ -1,4 +1,5 @@
 #!/bin/bash
+useradd -m munhunger
 pacman -Syu
 pacman -Syy
 pacman -S emacs --noconfirm --needed
