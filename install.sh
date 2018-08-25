@@ -7,5 +7,5 @@ pacman -Syy
 pacman -S emacs --noconfirm --needed
 for INSTALL_FILE in $(ls install)
 do
-    /bin/bash $INSTALL_FILE
+    /bin/bash install/$INSTALL_FILE
 done
