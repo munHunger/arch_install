@@ -168,8 +168,8 @@ bindsym $mod+r mode "resize"
 # finds out, if available)
 bar {
 #        status_command ~/.config/i3status/status.sh
-#	 status_command i3status
-	 status_command java -jar ~/.config/i3status/i3status.jar
+	 status_command i3status
+#	 status_command java -jar ~/.config/i3status/i3status.jar
 }
 
 # -=-=-=-=-=-=-CUSTOM-=-=-=-=-=-=-

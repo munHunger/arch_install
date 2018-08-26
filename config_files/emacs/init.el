@@ -10,9 +10,6 @@
 (require 'package)
 (add-to-list 'package-archives
 	     '("melpa" . "http://melpa.org/packages/"))
-(add-to-list 'load-path "~/emacs/neotree")
-(require 'neotree)
-(global-set-key [f8] 'neotree-toggle)
 
 (add-hook 'yaml-mode-hook
 	  (lambda ()

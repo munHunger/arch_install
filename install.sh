@@ -1,5 +1,6 @@
 #!/bin/bash
 useradd -m munhunger
+chown -R munhunger:munhunger /home/munhunger
 echo "Set password for user"
 passwd munhunger
 echo "munhunger ALL=(ALL:ALL) ALL"  >> /etc/sudoers
