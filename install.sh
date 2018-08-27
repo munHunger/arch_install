@@ -7,6 +7,7 @@ echo "munhunger ALL=(ALL:ALL) ALL"  >> /etc/sudoers
 cd /tmp
 git clone https://github.com/munhunger/arch_install.git
 chown -R munhunger:munhunger arch_install
+chmod -R 777 arch_install
 cd arch_install
 pacman -Syu
 pacman -Syy
