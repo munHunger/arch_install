@@ -2,7 +2,7 @@
 echo "Installing google-chrome from AUR"
 git clone https://aur.archlinux.org/google-chrome.git
 cd google-chrome
-runuser -l munhunger -c 'makepkg -sri'
+runuser munhunger -c 'makepkg -sri'
 cd ..
 
 echo "Installing bluetooth manager"
@@ -32,7 +32,7 @@ pacman -S gnupg --noconfirm --needed
 echo "Installing spotify"
 git clone https://aur.archlinux.org/spotify.git
 cd spotify
-runuser -l munhunger -c 'makepkg -sri'
+runuser munhunger -c 'makepkg -sri'
 cd
 
 echo "Installing cron"
