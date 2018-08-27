@@ -1,5 +1,6 @@
 #!/bin/bash
 git clone https://aur.archlinux.org/polybar-git.git
+chown -R munhunger:munhunger polybar
 cd polybar
 runuser munhunger -c 'makepkg -sri'
 pacman -S jsoncpp --noconfirm --needed

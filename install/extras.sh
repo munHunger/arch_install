@@ -1,6 +1,7 @@
 #!/bin/bash
 echo "Installing google-chrome from AUR"
 git clone https://aur.archlinux.org/google-chrome.git
+chown -R munhunger:munhunger google-chrome
 cd google-chrome
 runuser munhunger -c 'makepkg -sri'
 cd ..
@@ -31,6 +32,7 @@ pacman -S gnupg --noconfirm --needed
 
 echo "Installing spotify"
 git clone https://aur.archlinux.org/spotify.git
+chown -R munhunger:munhunger spotify
 cd spotify
 runuser munhunger -c 'makepkg -sri'
 cd
