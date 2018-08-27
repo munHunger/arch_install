@@ -3,7 +3,7 @@ useradd -m munhunger
 chown -R munhunger:munhunger /home/munhunger
 echo "Set password for user"
 passwd munhunger
-echo "munhunger ALL=(ALL:ALL) ALL"  >> /etc/sudoers
+echo "munhunger ALL=(ALL) NOPASSWD: ALL"  >> /etc/sudoers
 cd /tmp
 git clone https://github.com/munhunger/arch_install.git
 chown -R munhunger:munhunger arch_install
@@ -15,3 +15,5 @@ for INSTALL_FILE in $(ls install)
 do
     /bin/bash install/$INSTALL_FILE
 done
+head -n -1 /etc/sudoers > /tmp/sudo ; mv /tmp/sudo /etc/sudoers
+echo "munhunger ALL=(ALL:ALL) ALL"  >> /etc/sudoers
