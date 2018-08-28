@@ -1,4 +1,5 @@
 #!/bin/bash
+localectl set-keymap sv-latin1
 useradd -m munhunger
 chown -R munhunger:munhunger /home/munhunger
 echo "Set password for user"
