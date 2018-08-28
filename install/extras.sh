@@ -1,6 +1,6 @@
 #!/bin/bash
 echo "Installing google-chrome from AUR"
-yay -S google-chrome
+runuser munhunger -c 'yay -S google-chrome'
 
 echo "Installing bluetooth manager"
 pacman -S blueberry --noconfirm --needed
@@ -12,7 +12,7 @@ systemctl enable wpa_supplicant.service
 gpasswd -a munhunger network
 
 echo "Installing spotify"
-yay -S spotify
+runuser munhunger -c 'yay -S spotify'
 
 echo "Installing mopidy"
 pacman -S python2-pip mopidy --noconfirm --needed
