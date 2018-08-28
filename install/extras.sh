@@ -1,10 +1,6 @@
 #!/bin/bash
 echo "Installing google-chrome from AUR"
-git clone https://aur.archlinux.org/google-chrome.git
-chown -R munhunger:munhunger google-chrome
-cd google-chrome
-runuser munhunger -c 'makepkg -sri'
-cd ..
+yay -S google-chrome
 
 echo "Installing bluetooth manager"
 pacman -S blueberry --noconfirm --needed
@@ -16,11 +12,7 @@ systemctl enable wpa_supplicant.service
 gpasswd -a munhunger network
 
 echo "Installing spotify"
-git clone https://aur.archlinux.org/spotify.git
-chown -R munhunger:munhunger spotify
-cd spotify
-runuser munhunger -c 'makepkg -sri'
-cd
+yay -S spotify
 
 echo "Installing mopidy"
 pacman -S python2-pip mopidy --noconfirm --needed

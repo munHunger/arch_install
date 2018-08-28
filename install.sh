@@ -11,6 +11,10 @@ chmod -R 777 arch_install
 cd arch_install
 pacman -Syu
 pacman -Syy
+git clone https://aur.archlinux.org/yay.git
+cd yay
+runuser munhunger -c 'makepkg -sri'
+cd ..
 for INSTALL_FILE in $(ls install)
 do
     /bin/bash install/$INSTALL_FILE
