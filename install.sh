@@ -12,6 +12,7 @@ cd arch_install
 pacman -Syu
 pacman -Syy
 git clone https://aur.archlinux.org/yay.git
+chmod -R 777 yay
 cd yay
 runuser munhunger -c 'makepkg -sri'
 cd ..
