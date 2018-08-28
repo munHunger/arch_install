@@ -16,6 +16,7 @@ runuser munhunger -c 'yay -S spotify'
 
 echo "Installing mopidy"
 pacman -S python2-pip mopidy --noconfirm --needed
+runuser munhunger -c 'yay -S libspotify'
 echo "Installing mopidy iris web client"
 pip2 install Mopidy-Iris
 echo "Installing mopidy spotify plugin"
