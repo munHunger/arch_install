@@ -18,6 +18,13 @@ mkdir /home/munhunger/.config/mopidy
 echo "Decrypt mopidy config"
 gpg config_files/mopidy/mopidy.conf.gpg -o /home/munhunger/.config/mopidy/mopidy.conf
 
+echo "Installing spotify"
+git clone https://aur.archlinux.org/spotify.git
+chown -R munhunger:munhunger spotify
+cd spotify
+runuser munhunger -c 'makepkg -sri'
+cd
+
 echo "Installing mopidy"
 pacman -S python2-pip mopidy --noconfirm --needed
 echo "Installing mopidy iris web client"
@@ -28,14 +35,6 @@ pip2 install Mopidy-Spotify-Tunigo
 #Auth https://mopidy.com/authenticate/#spotify
 systemctl enable mopidy
 pacman -S gnupg --noconfirm --needed
-
-
-echo "Installing spotify"
-git clone https://aur.archlinux.org/spotify.git
-chown -R munhunger:munhunger spotify
-cd spotify
-runuser munhunger -c 'makepkg -sri'
-cd
 
 echo "Installing cron"
 pacman -S cron --noconfirm --needed
