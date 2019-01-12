@@ -41,6 +41,7 @@ bindsym $mod+Shift+q kill
 # start dmenu (a program launcher)
 #bindsym $mod+d exec dmenu_run
 bindsym $mod+d exec rofi -show combi
+bindsym $mod+p exec bwmenu
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
@@ -100,7 +101,7 @@ set $ws1 1 status
 set $ws2 2 ide
 set $ws3 3 docs
 set $ws4 4 web
-set $ws5 5 git
+set $ws5 5 graphics
 set $ws6 6
 set $ws7 7 spotify
 set $ws8 8 priv
@@ -164,49 +165,30 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
-# Start i3bar to display a workspace bar (plus the system information i3status
-# finds out, if available)
-#bar {
-#        status_command ~/.config/i3status/status.sh
-#	 status_command i3status
-#	 status_command polybar poly
-#	 status_command java -jar ~/.config/i3status/i3status.jar
-#}
-exec_always --no-startup-id polybar poly
+exec --no-startup-id xrandr --output eDP1 --scale 0.6x0.6
+exec --no-startup-id polybar poly
+exec --no-startup-id mkchromecast -t
 
 # -=-=-=-=-=-=-CUSTOM-=-=-=-=-=-=-
-#bindsym $mod+l exec "~/.config/i3lock/config.sh"
-#bindsym $mod+l exec "~/.config/i3/lock.sh"
-#exec xautolock -time 10 -locker '~/.config/i3lock/config.sh' &
+gaps inner 10
+gaps outer 0
+smart_borders on
+new_window none
 bindsym $mod+Control+Left move workspace to output left
 bindsym $mod+Control+Right move workspace to output right
 bindsym $mod+Control+Up move workspace to output up
 bindsym $mod+Control+Down move workspace to output down
-#exec --no-startup-id "feh --bg-scale ~/wallpaper/m.jpg"
-#exec --no-startup-id "nm-applet"
-#exec --no-startup-id "blueman-applet"
-#exec --no-startup-id "~/.config/i3/dbus.sh"
-
+bindsym $mod+Shift+i exec "~/.config/script/toggle_invert.sh"
+bindsym $mod+l exec "i3lock -c 565264"
+exec --no-startup-id "feh --bg-scale ~/wallpaper/red.jpg"
+exec "compton"
+exec --no-startup-id "nm-applet"
+exec --no-startup-id /usr/lib/polkit-kde-authentication-agent-1
 bindsym XF86AudioPause exec "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause"
 bindsym XF86AudioPlay exec "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause"
+bindsym XF86AudioLowerVolume exec "pactl set-sink-volume @DEFAULT_SINK@ -1000"
+bindsym XF86AudioRaiseVolume exec "pactl set-sink-volume @DEFAULT_SINK@ +1000"
+bindsym XF86AudioMute exec "pactl set-sink-mute @DEFAULT_SINK@ toggle"
 
-#exec --no-startup-id messengerfordesktop
-#exec --no-startup-id telegram
-#exec --no-startup-id hiri
-#exec --no-startup-id slack
-#exec --no-startup-id intelliJ
-#exec --no-startup-id urxvt
-#for_window [class="sddm-greeter"] fullscreen toggle global
-#for_window [class="URxvt"] border 1pixel
-#assign [class="Pgadmin3"] $ws6
-#assign [class="Code"] $ws2
-#assign [class="jetbrains-idea"] $ws2
-#assign [class="Emacs"] $ws2
-#assign [class="Spotify"] $ws7
-#assign [class="Slack"] $ws9
-#assign [class="hiri"] $ws9
-#assign [class="Telegram"] $ws9
-#assign [class="Messenger for Desktop"] $ws9
-
-#bindsym Print exec scrot '%Y%m%d_%H%M%S.png' -e 'mv $f $HOME/pictures/screenshots' && notify-send 'screnshot' 'taken. in ~/pictures/screenshots'
-#bindsym shift+Print --release exec notify-send 'screenshot' 'please select area' && scrot '%Y%m%d_%H%M%S.png' -s -e 'mv $f $HOME/pictures/screenshots' && notify-send 'screnshot' 'taken. in ~/pictures/screenshots'
+bindsym Print exec scrot '%Y%m%d_%H%M%S.png' -e 'mv $f $HOME/pictures/screenshots' && notify-send 'screnshot' 'taken. in ~/pictures/screenshots'
+bindsym shift+Print --release exec notify-send 'screenshot' 'please select area' && scrot '%Y%m%d_%H%M%S.png' -s -e 'mv $f $HOME/pictures/screenshots' && notify-send 'screnshot' 'taken. in ~/pictures/screenshots'

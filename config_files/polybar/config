@@ -21,18 +21,19 @@
 background = #222
 background-alt = #444
 ;foreground = ${xrdb:color7:#222}
-foreground = #dfdfdf
+foreground = #A7C9C3
+foreground-focus = #FFC600
 foreground-alt = #555
 primary = #ffb52a
 secondary = #e60053
-alert = #bd2c40
+alert = #C714CC
 
 [bar/poly]
 width = 100%
 height = 27
 modules-left = i3
-modules-center = mpd
-modules-right = filesystem  pulseaudio  memory cpu wlan eth battery  date powermenu
+modules-center = spotify
+modules-right = filesystem pulseaudio updates memory cpu bluetooth wlan eth battery  date powermenu
 radius = 6.0
 background = ${colors.background}
 foreground = ${colors.foreground}
@@ -51,6 +52,80 @@ font-2 = Font Awesome 5 Free:style=Solid:pixelsize=10;1
 
 tray-position = right
 tray-padding = 2
+
+[module/spotify]
+type = custom/script
+
+; Available tokens:
+;   %counter%
+; Command to be executed (using "/usr/bin/env sh -c [command]")
+exec = /home/munhunger/.config/polybar/spotify-playing.sh
+exec-if = playerctl status | grep -q Playing
+tail = false
+
+interval = 2
+; Available tags:
+;   <output> - deprecated
+;   <label> (default)
+format = <label>
+format-foreground = ${colors.foreground}
+format-padding = 4
+
+; Available tokens:
+;   %output%
+; Default: %output%
+label = %output%
+format-prefix = " "
+format-prefix-foreground = ${colors.foreground-alt}
+
+[module/updates]
+type = custom/script
+
+; Available tokens:
+;   %counter%
+; Command to be executed (using "/usr/bin/env sh -c [command]")
+exec = cat /tmp/updateCount
+
+tail = false
+
+interval = 2
+; Available tags:
+;   <output> - deprecated
+;   <label> (default)
+format = <label>
+format-foreground = ${colors.foreground}
+format-padding = 4
+
+; Available tokens:
+;   %output%
+; Default: %output%
+label = %output%
+format-prefix = " "
+format-prefix-foreground = ${colors.foreground-alt}
+click-left = apper --updates
+
+[module/bluetooth]
+type = custom/script
+
+; Available tokens:
+;   %counter%
+; Command to be executed (using "/usr/bin/env sh -c [command]")
+exec = bluetoothctl devices | cut -d ' ' -f 2 | xargs bluetoothctl info $1 | grep Name | cut -d ' ' -f 2
+exec-if = bluetoothctl devices | cut -d ' ' -f 2 | xargs bluetoothctl info $1 | grep Connected | cut -d ' ' -f 2 | grep -q yes
+
+tail = false
+
+interval = 2
+; Available tags:
+;   <output> - deprecated
+;   <label> (default)
+format = <label>
+format-foreground = ${colors.foreground}
+format-padding = 4
+
+label = %output%
+format-prefix = " "
+format-prefix-foreground = ${colors.foreground-alt}
 
 [module/filesystem]
 type = internal/fs
@@ -85,6 +160,17 @@ label-empty-padding = 2
 ; label-separator = |
 
 [module/i3]
+ws-icon-0 = 1 status;
+ws-icon-1 = 2 ide;
+ws-icon-2 = 3 docs;
+ws-icon-3 = 4 web;
+ws-icon-4 = 5 graphics;
+ws-icon-5 = 6;
+ws-icon-6 = 7 spotify;
+ws-icon-7 = 8 priv;
+ws-icon-8 = 9 mail;
+ws-icon-default = 
+
 type = internal/i3
 format = <label-state> <label-mode>
 index-sort = true
@@ -98,13 +184,14 @@ label-mode-foreground = #000
 label-mode-background = ${colors.primary}
 
 ; focused = Active workspace on focused monitor
-label-focused = %index%
+label-focused = %icon%
 label-focused-background = ${module/bspwm.label-focused-background}
+label-focused-foreground = ${colors.foreground-focus}
 label-focused-underline = ${module/bspwm.label-focused-underline}
 label-focused-padding = ${module/bspwm.label-focused-padding}
 
 ; unfocused = Inactive workspace on any monitor
-label-unfocused = %index%
+label-unfocused = %icon%
 label-unfocused-padding = ${module/bspwm.label-occupied-padding}
 
 ; visible = Active workspace on unfocused monitor
@@ -114,7 +201,8 @@ label-visible-underline = ${self.label-focused-underline}
 label-visible-padding = ${self.label-focused-padding}
 
 ; urgent = Workspace with urgency hint set
-label-urgent = %index%
+label-urgent = %icon% %index%
+label-urgent-foreground = ${colors.alert}
 label-urgent-background = ${module/bspwm.label-urgent-background}
 label-urgent-padding = ${module/bspwm.label-urgent-padding}
 
@@ -151,11 +239,10 @@ label = %percentage_used%%
 
 [module/wlan]
 type = internal/network
-interface = net1
+interface = wlp107s0
 interval = 3.0
 
 format-connected = <ramp-signal> <label-connected>
-format-connected-underline = #9f78e1
 label-connected = %essid%
 
 format-disconnected =
@@ -230,13 +317,14 @@ bar-volume-empty-foreground = ${colors.foreground-alt}
 
 [module/battery]
 type = internal/battery
-battery = BAT0
+battery = BAT1
 adapter = AC
 full-at = 98
 
 format-charging = <animation-charging> <label-charging>
 
 format-discharging = <animation-discharging> <label-discharging>
+label-discharging = %percentage%% %time%
 
 format-full-prefix = " "
 format-full-prefix-foreground = ${colors.foreground-alt}
@@ -282,10 +370,10 @@ menu-0-1-exec = menu-open-2
 menu-1-0 = cancel
 menu-1-0-exec = menu-open-0
 menu-1-1 = reboot
-menu-1-1-exec = sudo reboot
+menu-1-1-exec = reboot
 
 menu-2-0 = power off
-menu-2-0-exec = sudo poweroff
+menu-2-0-exec = poweroff
 menu-2-1 = cancel
 menu-2-1-exec = menu-open-0
 
