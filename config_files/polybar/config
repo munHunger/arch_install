@@ -17,28 +17,26 @@
 ;==========================================================
 
 [colors]
-;background = ${xrdb:color0:#222}
-background = #222
-background-alt = #444
-;foreground = ${xrdb:color7:#222}
-foreground = #A7C9C3
-foreground-focus = #FFC600
-foreground-alt = #555
-primary = #ffb52a
-secondary = #e60053
-alert = #C714CC
+background = ${xrdb:color0:#000}
+background-alt = ${xrdb:color0:#000}
+foreground = ${xrdb:color7:#A7C9C3}
+foreground-focus = ${xrdb:color6:#FFC600}
+foreground-alt = ${xrdb:color8:#555}
+primary = ${xrdb:color7:#ffb52a}
+secondary = ${xrdb:color6:#e60053}
+alert = ${xrdb:color4:#C714CC}
 
 [bar/poly]
 width = 100%
 height = 27
-modules-left = i3
-modules-center = spotify
-modules-right = filesystem pulseaudio updates memory cpu bluetooth wlan eth battery  date powermenu
-radius = 6.0
+modules-left = time eta cpu
+modules-center = i3
+modules-right = battery pulseaudio date powermenu
+radius = 0.0
 background = ${colors.background}
 foreground = ${colors.foreground}
 line-size = 3
-border-size = 4
+border-size = 0
 border-color = #00000000
 padding-left = 0
 padding-right = 2
@@ -47,11 +45,80 @@ module-margin-right = 2
 
 font-0 = fixed:pixelsize=10;1
 font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
-font-2 = Font Awesome 5 Free:style=Solid:pixelsize=10;1
+font-2 = FontAwesome:style=Solid:pixelsize=10;1
 ;font-2 = siji:pixelsize=10;1
 
 tray-position = right
 tray-padding = 2
+
+[module/cpu]
+type = internal/cpu
+format-prefix =  
+label = " %percentage%%"
+format-foreground = ${colors.foreground}
+format-prefix-foreground = ${colors.foreground-alt}
+
+interval = 2
+
+[module/eta]
+type = custom/script
+
+exec = node ~/.config/time/eta.js
+tail = false
+
+interval = 2
+format = <label>
+format-foreground = ${colors.foreground}
+format-padding = 4
+
+label = %output%
+format-prefix = " "
+format-prefix-foreground = ${colors.foreground-alt}
+
+[module/time]
+type = custom/script
+
+exec = node ~/.config/time/short.js
+tail = false
+
+interval = 2
+format = <label>
+format-foreground = ${colors.foreground}
+format-padding = 4
+
+label = %output%
+format-prefix = " "
+format-prefix-foreground = ${colors.foreground-alt}
+
+[module/lunch]
+type = custom/script
+
+exec = node ~/.config/time/lunch.js
+tail = false
+
+interval = 2
+format = <label>
+format-foreground = ${colors.foreground}
+format-padding = 4
+
+label = %output%
+format-prefix = " "
+format-prefix-foreground = ${colors.foreground-alt}
+
+[module/locked]
+type = custom/script
+
+exec = node ~/.config/time/locked.js
+tail = false
+
+interval = 2
+format = <label>
+format-foreground = ${colors.foreground}
+format-padding = 4
+
+label = %output%
+format-prefix = " "
+format-prefix-foreground = ${colors.foreground-alt}
 
 [module/spotify]
 type = custom/script
@@ -59,7 +126,7 @@ type = custom/script
 ; Available tokens:
 ;   %counter%
 ; Command to be executed (using "/usr/bin/env sh -c [command]")
-exec = /home/munhunger/.config/polybar/spotify-playing.sh
+exec = ~/.config/polybar/spotify-playing.sh
 exec-if = playerctl status | grep -q Playing
 tail = false
 
@@ -77,32 +144,6 @@ format-padding = 4
 label = %output%
 format-prefix = " "
 format-prefix-foreground = ${colors.foreground-alt}
-
-[module/updates]
-type = custom/script
-
-; Available tokens:
-;   %counter%
-; Command to be executed (using "/usr/bin/env sh -c [command]")
-exec = cat /tmp/updateCount
-
-tail = false
-
-interval = 2
-; Available tags:
-;   <output> - deprecated
-;   <label> (default)
-format = <label>
-format-foreground = ${colors.foreground}
-format-padding = 4
-
-; Available tokens:
-;   %output%
-; Default: %output%
-label = %output%
-format-prefix = " "
-format-prefix-foreground = ${colors.foreground-alt}
-click-left = apper --updates
 
 [module/bluetooth]
 type = custom/script
@@ -160,15 +201,15 @@ label-empty-padding = 2
 ; label-separator = |
 
 [module/i3]
-ws-icon-0 = 1 status;
-ws-icon-1 = 2 ide;
-ws-icon-2 = 3 docs;
-ws-icon-3 = 4 web;
-ws-icon-4 = 5 graphics;
-ws-icon-5 = 6;
-ws-icon-6 = 7 spotify;
-ws-icon-7 = 8 priv;
-ws-icon-8 = 9 mail;
+ws-icon-0 = 1 status;1
+ws-icon-1 = 2 ide;2
+ws-icon-2 = 3 docs;3
+ws-icon-3 = 4 web;4
+ws-icon-4 = 5 graphics;5
+ws-icon-5 = 6;6
+ws-icon-6 = 7 spotify;7
+ws-icon-7 = 8 priv;8
+ws-icon-8 = 9 mail;9
 ws-icon-default = 
 
 type = internal/i3
@@ -184,18 +225,18 @@ label-mode-foreground = #000
 label-mode-background = ${colors.primary}
 
 ; focused = Active workspace on focused monitor
-label-focused = %icon%
-label-focused-background = ${module/bspwm.label-focused-background}
-label-focused-foreground = ${colors.foreground-focus}
-label-focused-underline = ${module/bspwm.label-focused-underline}
+label-focused = x
+label-focused-background = ${colors.background}
+label-focused-foreground = ${colors.foreground}
+label-focused-underline = ${colors.background}
 label-focused-padding = ${module/bspwm.label-focused-padding}
 
 ; unfocused = Inactive workspace on any monitor
-label-unfocused = %icon%
+label-unfocused = ·
 label-unfocused-padding = ${module/bspwm.label-occupied-padding}
 
 ; visible = Active workspace on unfocused monitor
-label-visible = %index%
+label-visible = x
 label-visible-background = ${self.label-focused-background}
 label-visible-underline = ${self.label-focused-underline}
 label-visible-padding = ${self.label-focused-padding}
@@ -222,13 +263,6 @@ icon-next = 
 
 label-song-maxlen = 25
 label-song-ellipsis = true
-
-[module/cpu]
-type = internal/cpu
-interval = 2
-format-prefix = " "
-format-prefix-foreground = ${colors.foreground-alt}
-label = %percentage:2%%
 
 [module/memory]
 type = internal/memory
@@ -317,14 +351,14 @@ bar-volume-empty-foreground = ${colors.foreground-alt}
 
 [module/battery]
 type = internal/battery
-battery = BAT1
+battery = BAT0
 adapter = AC
 full-at = 98
 
 format-charging = <animation-charging> <label-charging>
 
 format-discharging = <animation-discharging> <label-discharging>
-label-discharging = %percentage%% %time%
+label-discharging = %percentage%%
 
 format-full-prefix = " "
 format-full-prefix-foreground = ${colors.foreground-alt}
