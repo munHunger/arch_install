@@ -8,7 +8,7 @@ swapon /dev/sda2
 mount /dev/sda1 /mnt
 mkdir /mnt/home
 mount /dev/sda5 /mnt/home
-pacstrap /mnt base base-devel
+pacstrap /mnt base base-devel linux linux-firmware
 genfstab /mnt >> /mnt/etc/fstab
 arch-chroot /mnt /bin/bash
 nano /etc/locale.gen #en_US.UTF-8 UTF-8
